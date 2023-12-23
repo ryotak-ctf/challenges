@@ -1,4 +1,4 @@
-import { sanitizeHtml } from "./sanitizer";
+import { sanitizeHtml } from "./sanitizer.js";
 
 import http from "http";
 import { runBot } from "./bot.js";
