@@ -1,0 +1,105 @@
+<p></p>
+<script>
+    const SANITIZER_CONFIG = {
+        // only allow safe tags!!!!!
+        DANGEROUS_TAGS:
+            ["address",
+                "article",
+                "aside",
+                "footer",
+                "header",
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "h5",
+                "h6",
+                "hgroup",
+                "html",
+                "main",
+                "nav",
+                "section",
+                "blockquote",
+                "dd",
+                "div",
+                "dl",
+                "dt",
+                "figcaption",
+                "figure",
+                "form",
+                "hr",
+                "li",
+                "main",
+                "ol",
+                "p",
+                "pre",
+                "ul",
+                "a",
+                "abbr",
+                "b",
+                "bdi",
+                "bdo",
+                "br",
+                "body",
+                "cite",
+                "code",
+                "data",
+                "dfn",
+                "em",
+                "i",
+                "kbd",
+                "mark",
+                "q",
+                "rb",
+                "rp",
+                "rt",
+                "rtc",
+                "ruby",
+                "s",
+                "samp",
+                "small",
+                "span",
+                "strong",
+                "sub",
+                "sup",
+                "style",
+                "time",
+                "u",
+                "var",
+                "wbr",
+                "caption",
+                "col",
+                "colgroup",
+                "table",
+                "tbody",
+                "td",
+                "tfoot",
+                "th",
+                "thead",
+                "tr"],
+
+        // attributes are dangerous, so we don't allow them
+        ALLOW_ATTRIBUTES: false
+    };
+    const html = new URLSearchParams(location.search).get('html');
+    if (html) {
+        document.querySelector('p').innerHTML = sanitizeHtml(html);
+    } else {
+        document.querySelector('p').textContent = 'Specify a URL in the ?html= parameter.';
+    }
+
+    function sanitizeHtml(html) {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const allElems = doc.querySelectorAll('*');
+        for (const elem of allElems) {
+            if (!SANITIZER_CONFIG.DANGEROUS_TAGS.includes(elem.tagName.toLowerCase())) {
+                elem.remove();
+                continue;
+            }
+            for (const attr of elem.attributes) {
+                elem.removeAttribute(attr.name);
+            }
+        }
+        return doc.body.innerHTML;
+    }
+</script>

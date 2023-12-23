@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <title>Loading article...</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <p id="content"></p>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id") || "1";
+        $.ajax({
+            url: `/api/posts/${id}`,
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                $("#content").text(data.content);
+                document.title = data.title;
+            },
+            error: function (err) {
+                $("#content").text("Error loading article");
+            }
+        });
+    </script>
+</body>
+
+</html>

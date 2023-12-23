@@ -1,0 +1,9 @@
+<p>You are being redirected...</p>
+<script>
+    const url = new URLSearchParams(location.search).get('url');
+    if (url) {
+        location.href = url;
+    } else {
+        document.querySelector('p').textContent = 'Specify a URL in the ?url= parameter.';
+    }
+</script>
