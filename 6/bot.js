@@ -4,11 +4,14 @@ export async function runBot(input) {
     console.log("Running puppeteer...");
     if (!input.startsWith("http://localhost:18080/")) {
         console.log("Input must start with http://localhost:18080/");
-        return;
+        process.exit(1);
     }
+
     const browser = await puppeteer.launch({
         headless: 'new',
         timeout: 10000,
+        product: 'firefox',
+        protocol: 'webDriverBiDi',
     });
     const page = await browser.newPage();
     await page.exposeFunction('solve', async () => {

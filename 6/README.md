@@ -11,6 +11,8 @@
 I found a website that seems pretty old and legacy. However, after some investigation, I found no vulnerabilities in that website.  
 Do you think that there is a vulnerability in this website?  
 
+**Note:** This challenge is expected to be solved in Firefox.  
+
 ### How to debug
 Clone this repository, and run `docker compose up` in this directory.  
 Then, you can access the challenge at `http://localhost:18080/`.
